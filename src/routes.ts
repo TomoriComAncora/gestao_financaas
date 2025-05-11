@@ -1,10 +1,10 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+
+//controllers
+import { CreateUserController } from "./controllers/user/CreateUserController";
 
 const router = Router();
-
-router.get("/teste", (req: Request, res: Response) => {
-    return res.json({ok: true});
-    // throw new Error("Erro aom abrir server")
-});
+//criar usuario
+router.post("/users", new CreateUserController().handle)
 
 export {router}
