@@ -1,9 +1,13 @@
 import { Router } from "express";
 
 //controllers
+//user
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
+
+//transaction
+import { CreateTransactionController } from "./controllers/transaction/CreateTransactionController";
 
 //Middlewares
 import { isAuthenticated } from "./middlewares/isAuthenticated";
@@ -17,5 +21,12 @@ router.post("/session", new AuthUserController().handle);
 
 //detalhes do usuario
 router.get("/me", isAuthenticated, new DetailUserController().handle);
+
+//criando transacao
+router.post(
+  "/transaction",
+  isAuthenticated,
+  new CreateTransactionController().handle
+);
 
 export { router };
