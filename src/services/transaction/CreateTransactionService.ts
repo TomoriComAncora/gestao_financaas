@@ -67,6 +67,15 @@ class CreateTransactionService {
         date: date,
         userId,
       },
+      select:{
+        id: true,
+        name: true,
+        value: true,
+        type: true,
+        description: true,
+        date: true,
+        userId: true
+      }
     });
 
     //atualizar o saldo
