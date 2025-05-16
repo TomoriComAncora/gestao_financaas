@@ -64,7 +64,7 @@ class CreateTransactionService {
         value: value,
         type: type,
         description: description,
-        date: date,
+        date: transactionDate,
         userId,
       },
       select:{
