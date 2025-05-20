@@ -8,6 +8,7 @@ import { DetailUserController } from "./controllers/user/DetailUserController";
 
 //transaction
 import { CreateTransactionController } from "./controllers/transaction/CreateTransactionController";
+import { ListTransactionController } from "./controllers/transaction/ListTransactionController";
 
 //Middlewares
 import { isAuthenticated } from "./middlewares/isAuthenticated";
@@ -27,6 +28,13 @@ router.post(
   "/transaction",
   isAuthenticated,
   new CreateTransactionController().handle
+);
+
+//listando transacoes
+router.get(
+  "/transaction",
+  isAuthenticated,
+  new ListTransactionController().handle
 );
 
 export { router };
