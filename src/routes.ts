@@ -9,6 +9,7 @@ import { DetailUserController } from "./controllers/user/DetailUserController";
 //transaction
 import { CreateTransactionController } from "./controllers/transaction/CreateTransactionController";
 import { ListTransactionController } from "./controllers/transaction/ListTransactionController";
+import { UpdateTransactionController } from "./controllers/transaction/UpdateTransactionController";
 
 //Middlewares
 import { isAuthenticated } from "./middlewares/isAuthenticated";
@@ -36,5 +37,8 @@ router.get(
   isAuthenticated,
   new ListTransactionController().handle
 );
+
+//Editar transacoes
+router.put("/edit", isAuthenticated, new UpdateTransactionController().handle)
 
 export { router };

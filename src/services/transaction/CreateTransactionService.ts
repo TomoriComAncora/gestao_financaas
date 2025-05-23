@@ -13,7 +13,7 @@ interface TrasactionRequest {
 class CreateTransactionService {
   async execute(
     { name, value, type, description, date }: TrasactionRequest,
-    userId
+    userId:string
   ) {
     if (name === "") {
       throw new Error("Name invalid");

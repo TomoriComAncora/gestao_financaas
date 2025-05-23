@@ -22,6 +22,7 @@ class ListTransactionService {
         type: true,
         description: true,
         value: true,
+        date: true,
       },
     });
 
