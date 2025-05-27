@@ -61,6 +61,20 @@ class UpdateTransactionService {
       newBalance -= newValue;
     }
 
+        //validar e converter a data
+    let transactionDate: Date;
+    if (typeof date === "string") {
+      transactionDate = new Date(date);
+      if (isNaN(transactionDate.getTime())) {
+        throw new Error("Invalid date format");
+      }
+    } else if (date instanceof Date) {
+      transactionDate = date;
+    } else {
+      throw new Error("Invalid date");
+    }
+
+
     const updateTransaction = await prismaClient.transaction.update({
       where: { id },
       data: {
@@ -68,7 +82,7 @@ class UpdateTransactionService {
         value: newValue,
         type: newType,
         description: description ?? transaction.description,
-        date: date ?? transaction.date,
+        date: transactionDate ?? transaction.date,
       },
     });
 
