@@ -1,0 +1,30 @@
+
+
+services:
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1Cabeca1
+      POSTGRES_DB: financa
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/db_data
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:1Cabeca1@db:5432/financa?schema=public"
+      JWT_SECRET: 845ac03c29ca768f05addcd7d690c98c
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+volumes:
+  db_data:
