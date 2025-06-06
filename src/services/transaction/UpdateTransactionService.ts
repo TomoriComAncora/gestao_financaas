@@ -8,7 +8,7 @@ interface TransactionRequest {
   value?: number;
   type?: TransactionTypes;
   description?: string;
-  date?: Date;
+  date?: string | Date | null;
 }
 
 class UpdateTransactionService {
@@ -61,9 +61,16 @@ class UpdateTransactionService {
       newBalance -= newValue;
     }
 
-        //validar e converter a data
+    //validar e converter a data
+    console.log("Valor recebido em date:", date, "Tipo:", typeof date);
     let transactionDate: Date;
-    if (typeof date === "string") {
+    if (
+      date === undefined ||
+      date === null ||
+      (typeof date === "string" && date.trim() === "")
+    ) {
+      transactionDate = transaction.date;
+    } else if (typeof date === "string") {
       transactionDate = new Date(date);
       if (isNaN(transactionDate.getTime())) {
         throw new Error("Invalid date format");
@@ -73,7 +80,6 @@ class UpdateTransactionService {
     } else {
       throw new Error("Invalid date");
     }
-
 
     const updateTransaction = await prismaClient.transaction.update({
       where: { id },
